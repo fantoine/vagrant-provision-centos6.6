@@ -10,7 +10,7 @@ on a `vagrant` folder at the root of the folder which will be mounted on Vagrant
 
 ### Prepare Vagrantfile
 
-Copy `<project>/vagrant/Vagrantfile.dist` to '<project>/Vagrantfile' then edit it.
+Copy `<project>/vagrant/Vagrantfile.dist` to `<project>/Vagrantfile` then edit it.
 
 You can change several settings at the top of the file.
 **It's not advised to edit the rest of the file, unless you know what you do.**
@@ -25,7 +25,7 @@ Options:
 
 ### Prepare server configuration
 
-Copy `<project>/vagrant/config.sh.dist` to '<project>/vagrant/config.sh' then edit it.
+Copy `<project>/vagrant/config.sh.dist` to `<project>/vagrant/config.sh` then edit it.
 
 Options:
 - **TODO**

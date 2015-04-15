@@ -16,7 +16,7 @@ chown -R vagrant:vagrant ~/.ssh
 if ! grep -q $comment $authorized_keys; then
     echo 'Installing SSH keys'
     echo $comment >> $authorized_keys
-    cat $ssh >> $authorized_keys
+    cat $ssh_key >> $authorized_keys
 fi
 
 if ! grep -q $comment $known_hosts; then
