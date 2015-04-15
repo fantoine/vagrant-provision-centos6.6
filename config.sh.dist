@@ -1,0 +1,42 @@
+#!/bin/bash
+
+declare -A CONFIG=(
+    # Server
+    ['server:timezone']='UTC'
+    ['server:ssh_key']='/vagrant/vagrant/ssh/id_rsa.pub'
+    ['server:known_hosts']='github.com bitbucket.com'
+
+    # Web
+    ['web:mode']='apache2'
+    ['web:webroots']='/vagrant/web/'
+
+    # PHP
+    ['php:enabled']=true
+    ['php:version']='5.6'
+    ['php:modules']='common mysql intl mcrypt sqlite3 gd mbstring xml tidy devel'
+    ['php:composer']=true
+
+    # Database
+    ['database:enabled']=true
+    ['database:mode']='percona'
+    ['database:fixtures']='/vagrant/vagrant/data/database/fixtures.sql'
+
+    # PhpMyAdmin
+    ['phpmyadmin:enabled']=true
+
+    # NodeJS
+    ['nodejs:enabled']=true
+    ['nodejs:libraries']='bower less gulp'
+
+    # RubyGem
+    ['ruby:enabled']=true
+    ['ruby:gems']='capifony'
+
+    # Symfony
+    ['symfony:installer']=true
+    ['symfony:twig']=true
+    
+    # Search engine
+    ['search:enabled']=true
+    ['search:mode']='elasticsearch'
+)
