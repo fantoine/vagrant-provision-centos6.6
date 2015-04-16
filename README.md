@@ -32,7 +32,7 @@ Options:
 
 Make it runnable by running:
 ```bash
-chmod +x vagrant/config.sh
+chmod +x <project>/vagrant/config.sh
 ```
 
 ### Create ssh keys

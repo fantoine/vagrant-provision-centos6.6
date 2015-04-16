@@ -54,6 +54,9 @@ fi
 if [ ${CONFIG['symfony:installer']} ]; then
     $scripts/symfony/installer.sh
 fi
+if [ ${CONFIG['symfony:completion']} ]; then
+    $scripts/symfony/completion.sh
+fi
 if [ ${CONFIG['symfony:twig']} ]; then
     $scripts/symfony/twig.sh
 fi
@@ -63,5 +66,5 @@ if [ ${CONFIG['search:enabled']} ] && [ -f $scripts/search/${CONFIG['search:mode
     $scripts/search/${CONFIG['search:mode']}.sh
 fi
 
-# Cleanup
-$scripts/cleanup.sh
+# Finalize
+$scripts/finalize.sh
