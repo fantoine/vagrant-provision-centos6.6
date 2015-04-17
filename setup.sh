@@ -7,9 +7,6 @@ scripts=$dir/scripts
 # Load configuration
 . $dir/config.sh
 
-# Load libraries
-. $dir/scripts/lib.sh
-
 # Server configuration
 if [ "$1" == "1" ]; then
     $scripts/server/user.sh

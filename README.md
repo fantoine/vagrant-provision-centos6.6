@@ -12,8 +12,8 @@ on a `vagrant` folder at the root of the folder which will be mounted on Vagrant
 
 Copy `<project>/vagrant/Vagrantfile.dist` to `<project>/Vagrantfile` then edit it.
 
-You can change several settings at the top of the file.
-**It's not advised to edit the rest of the file, unless you know what you do.**
+You can change several common settings at the top of the file.
+You can also update the rest of the file but at your own risks.
 
 Options:
 - **ip_address** *(required)* : The VM ip address
@@ -48,7 +48,7 @@ ssh-keygen -f <project>/vagrant/ssh/id_rsa -P '' -C 'vagrant'
 
 ## Creating and provisioning the VM
 
-You have done almost all the job. No you only have to *up* the VM and
+You have done almost all the job! Now you only have to *up* the VM and
 the provisioning will be executed automatically.
 ```bash
 vagrant up
@@ -57,6 +57,9 @@ vagrant up
 Since it will be the first time you login to the VM you may be asked to enter
 the password for the `vagrant` user.
 You only have to enter `vagrant` as the password and wait for provisioning to finish.
+
+Since the machine will be reloaded while provisioning, you may also be asked to enter
+your password several times.
 
 ## Contribute
 
