@@ -6,7 +6,7 @@ function phpmyadmin_sed {
     mode="$1"
     pattern=$( echo "$2" | sed -e 's/[]\/$*.^|[]/\\&/g' )
     content=$( echo "$3" | sed -e 's/[]\/$*.^|[]/\\&/g' )
-    
+
     if [ "$mode" == 's' ]; then
         sed -i -e "s/$pattern.*/$content/" $directory/config.inc.php
     elif [ "$mode" == 'a' ]; then
@@ -27,7 +27,7 @@ if [ ! -d $directory ]; then
     mkdir -p /tmp/phpmyadmin
     wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.4.2/phpMyAdmin-4.4.2-all-languages.tar.gz/download >/dev/null 2>&1
     tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null 2>&1
-    
+
     # Download theme
     wget -O /tmp/phpmyadmin/metro-theme.tar.gz http://sourceforge.net/projects/phpmyadmin/files/themes/metro/2.2/metro-2.2.zip/download >/dev/null 2>&1
     unzip /tmp/phpmyadmin/metro-theme.tar.gz -d /tmp/phpmyadmin >/dev/null 2>&1
@@ -45,7 +45,7 @@ if [ ! -f /etc/httpd/conf.d/phpmyadmin.conf ]; then
     echo 'Configuring PhpMyAdmin'
 
     # Create phpMyAdmin configuration storage
-    mysql -u root < $directory/sql/create_tables.sql
+    mysql -u root --password=vagrant < $directory/sql/create_tables.sql >/dev/null 2>&1
 
     # Update phpMyAdmin configuration
     cp $directory/config.sample.inc.php $directory/config.inc.php
@@ -53,12 +53,12 @@ if [ ! -f /etc/httpd/conf.d/phpmyadmin.conf ]; then
     phpmyadmin_sed s "\$cfg['blowfish_secret'] =" "\$cfg['blowfish_secret'] = '$secret';"
     phpmyadmin_sed s "\$cfg['Servers'][\$i]['auth_type']" "\$cfg['Servers'][\$i]['auth_type'] = 'config';"
     phpmyadmin_sed a "\$cfg['Servers'][\$i]['auth_type']" "\$cfg['Servers'][\$i]['user'] = 'root';"
-    phpmyadmin_sed a "\$cfg['Servers'][\$i]['user']" "\$cfg['Servers'][\$i]['password'] = '';"
+    phpmyadmin_sed a "\$cfg['Servers'][\$i]['user']" "\$cfg['Servers'][\$i]['password'] = 'vagrant';"
     phpmyadmin_sed a "\$cfg['Servers'][\$i]['compress']" "\$cfg['Servers'][\$i]['extension'] = 'mysqli';"
     phpmyadmin_sed s "\$cfg['Servers'][\$i]['AllowNoPassword']" "\$cfg['Servers'][\$i]['AllowNoPassword'] = true;"
     phpmyadmin_sed a "\$cfg['Servers'][\$i]['AllowNoPassword']" "\$cfg['Servers'][\$i]['nopassword'] = true;"
     phpmyadmin_sed s "// \$cfg['Servers'][\$i]['controluser']" "\$cfg['Servers'][\$i]['controluser'] = 'root';"
-    phpmyadmin_sed s "// \$cfg['Servers'][\$i]['controlpass']" "\$cfg['Servers'][\$i]['controlpass'] = '';"    
+    phpmyadmin_sed s "// \$cfg['Servers'][\$i]['controlpass']" "\$cfg['Servers'][\$i]['controlpass'] = 'vagrant';"
     phpmyadmin_sed a "\$cfg['SaveDir']" "\$cfg['ThemeManager'] = true;"
     phpmyadmin_sed a "\$cfg['ThemeManager']" "\$cfg['ThemeDefault'] = 'metro';"
 

@@ -20,8 +20,14 @@ sed -i -e "s@:timezone:@$mysqlTimezone@" /etc/my.cnf
 service mysql start >/dev/null 2>&1
 chkconfig mysql on >/dev/null 2>&1
 
-# Load fixtures
+# Delete test database
+mysql -u root <<< 'DROP DATABASE IF EXISTS `test`';
+
+# Prepare root mysql user
 mysql -u root <<< "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+mysql -u root <<< "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('vagrant');"
+
+# Load fixtures
 if [ "$fixtures" != "" ] && [ -f $fixtures ]; then
     echo 'Loading fixtures'
     mysql -u root < $fixtures
