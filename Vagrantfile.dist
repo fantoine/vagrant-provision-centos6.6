@@ -31,6 +31,9 @@ VAGRANTFILE_API_VERSION = "2"
 # Current OS
 IS_WINDOWS = /mswin|windows|mingw|cygwin/i === RbConfig::CONFIG['host_os']
 
+# Require the reboot plugin.
+require './vagrant/plugins/vagrant-provision-reboot-plugin'
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # All Vagrant configuration is done here. The most common configuration
     # options are documented and commented below. For a complete reference,
@@ -88,6 +91,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Provisionning
     config.vm.provision :shell do |s|
         s.path = "./vagrant/setup.sh"
-        s.args = [server_name + "." + server_extension, server_aliases.join(" ")]
+        s.args = ["1"]
+    end
+    config.vm.provision :reboot
+    config.vm.provision :shell do |s|
+        s.path = "./vagrant/setup.sh"
+        s.args = ["2", server_name + "." + server_extension, server_aliases.join(" ")]
     end
 end

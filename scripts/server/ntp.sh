@@ -4,18 +4,14 @@ timezone="$1"
 
 if [ ! -f /etc/ntp.conf ]; then
     echo 'Installing and configuring NTP'
-    yum install -y ntp
-    ntpdate pool.ntp.org
-    chkconfig ntpd on
-    service ntpd start
+    yum install -y ntp >/dev/null 2>&1
+    ntpdate pool.ntp.org >/dev/null 2>&1
+    chkconfig ntpd on >/dev/null 2>&1
+    service ntpd start >/dev/null 2>&1
 
     # Set timezone
     rm -f /etc/localtime
     ln -s /usr/share/zoneinfo/$timezone /etc/localtime
-
-    echo 'NTP is setup and configured'
-    echo 'Below should be the correct date:'
-    date
 
     # Replace centos pool with regular NTP pool
     sed -i 's/centos.pool.ntp.org/pool.ntp.org iburst/g' /etc/ntp.conf

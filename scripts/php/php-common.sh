@@ -6,7 +6,7 @@ read -a modules <<< "$3"
 
 if [ ! -f /etc/php.ini ]; then
     echo "Installing PHP and modules"
-    yum install -y $phpName ${modules[@]/#/$phpName-} --enablerepo=webtatic
+    yum install -y $phpName ${modules[@]/#/$phpName-} --enablerepo=webtatic >/dev/null 2>&1
 
     # Use the dev php.ini file
     cp -f /usr/share/doc/$phpName-*/php.ini-development /etc/php.ini
@@ -22,5 +22,5 @@ if [ ! -f /etc/php.ini ]; then
     chown -R vagrant:vagrant /var/lib/php/session
     
     # Restarting Apache
-    service httpd restart
+    service httpd restart >/dev/null 2>&1
 fi

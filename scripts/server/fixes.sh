@@ -4,5 +4,6 @@
 #See: https://github.com/mitchellh/vagrant/issues/1172
 if [ ! "$(grep single-request-reopen /etc/resolv.conf)" ]; then
     echo "Fixing slow curl requests"
-    echo 'options single-request-reopen' >> /etc/resolv.conf && service network restart;
+    echo 'options single-request-reopen' >> /etc/resolv.conf
+    service network restart >/dev/null 2>&1
 fi

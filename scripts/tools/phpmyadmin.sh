@@ -25,12 +25,12 @@ if [ ! -d $directory ]; then
 
     # Download latest phpMyAdmin
     mkdir -p /tmp/phpmyadmin
-    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.4.2/phpMyAdmin-4.4.2-all-languages.tar.gz/download
-    tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null
+    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.4.2/phpMyAdmin-4.4.2-all-languages.tar.gz/download >/dev/null 2>&1
+    tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null 2>&1
     
     # Download theme
-    wget -O /tmp/phpmyadmin/metro-theme.tar.gz http://sourceforge.net/projects/phpmyadmin/files/themes/metro/2.2/metro-2.2.zip/download
-    unzip /tmp/phpmyadmin/metro-theme.tar.gz -d /tmp/phpmyadmin >/dev/null
+    wget -O /tmp/phpmyadmin/metro-theme.tar.gz http://sourceforge.net/projects/phpmyadmin/files/themes/metro/2.2/metro-2.2.zip/download >/dev/null 2>&1
+    unzip /tmp/phpmyadmin/metro-theme.tar.gz -d /tmp/phpmyadmin >/dev/null 2>&1
 
     # Copy installation to specific folder
     mkdir -p /usr/share
@@ -86,5 +86,5 @@ if [ ! -f /etc/httpd/conf.d/phpmyadmin.conf ]; then
     cp /vagrant/vagrant/data/tools/phpmyadmin.conf /etc/httpd/conf.d/phpmyadmin.conf
 
     # Restart Apache
-    service httpd restart
+    service httpd restart >/dev/null 2>&1
 fi

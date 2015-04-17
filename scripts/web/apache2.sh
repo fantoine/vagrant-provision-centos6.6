@@ -1,18 +1,5 @@
 #!/bin/bash
 
-## TODOs ##
-# Make sure following modules are installed for html5 boilerplate htaccess #
-# setenvif
-# headers
-# mime
-# rewrite
-# autoindex
-# authz_core
-# deflate
-# filter
-# expires
-# include
-
 domain="$1"
 read -a domains <<< "$2"
 read -a webroots <<< "$3"
@@ -21,8 +8,8 @@ conf='/etc/httpd/conf.d/vagrant.conf'
 
 if [ ! -f /etc/httpd/conf/httpd.conf ] ; then
     echo 'Installing Apache'
-    yum install -y httpd
-    chkconfig httpd on
+    yum install -y httpd >/dev/null 2>&1
+    chkconfig httpd on >/dev/null 2>&1
 
     # Add upstart script
     cp /vagrant/vagrant/data/web/init-httpd.conf /etc/init/
@@ -60,5 +47,5 @@ if [ ! -f $conf ] ; then
     done
 
     # Restarting httpd service
-    service httpd restart
+    service httpd restart >/dev/null 2>&1
 fi

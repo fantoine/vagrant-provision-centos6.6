@@ -2,7 +2,7 @@
 
 if [ ! -f /usr/local/bin/composer ] ; then
     echo 'Installing composer'
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer >/dev/null 2>&1
     chown vagrant:vagrant /usr/local/bin/composer
     
     # Add composer update cron

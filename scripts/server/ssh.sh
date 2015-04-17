@@ -24,6 +24,6 @@ if ! grep -q $comment $known_hosts; then
     echo $comment >> $known_hosts
     for i in ${ssh_hosts[@]}
     do
-        ssh-keyscan -H $i >> $known_hosts
+        ssh-keyscan -H $i >> $known_hosts >/dev/null 2>&1
     done
 fi

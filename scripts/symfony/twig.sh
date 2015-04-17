@@ -6,11 +6,14 @@ if [ ! -f /etc/php.d/twig.ini ]; then
     mkdir -p /tmp/twig
 
     # Download twig
-    git clone https://github.com/twigphp/Twig.git /tmp/twig
+    git clone https://github.com/twigphp/Twig.git /tmp/twig >/dev/null 2>&1
 
     # Compile & Install
     pushd /tmp/twig/ext/twig/
-    phpize && ./configure && make && make install
+    phpize >/dev/null 2>&1
+    ./configure >/dev/null 2>&1
+    make >/dev/null 2>&1
+    make install >/dev/null 2>&1
     popd
 
     # Clean temporary files
@@ -21,5 +24,5 @@ if [ ! -f /etc/php.d/twig.ini ]; then
     echo 'extension=twig.so' >> /etc/php.d/twig.ini
 
     # Restart Apache
-    service httpd restart
+    service httpd restart >/dev/null 2>&1
 fi
