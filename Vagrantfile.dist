@@ -20,6 +20,8 @@
     server_name      = project_name
     server_aliases   = [ 'www' ]
 
+    # Provision configuration
+    provision_config = '/vagrant/vagrant/config.sh'
 
 #################################
 # Vagrant configuration
@@ -91,11 +93,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Provisionning
     config.vm.provision :shell do |s|
         s.path = "./vagrant/setup.sh"
-        s.args = ["1"]
+        s.args = [provision_config, "server"]
     end
     config.vm.provision :reboot
     config.vm.provision :shell do |s|
         s.path = "./vagrant/setup.sh"
-        s.args = ["2", server_name + "." + server_extension, server_aliases.join(" ")]
+        s.args = [provision_config, "install", server_name + "." + server_extension, server_aliases.join(" ")]
     end
 end

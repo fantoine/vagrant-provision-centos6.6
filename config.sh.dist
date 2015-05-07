@@ -9,17 +9,24 @@ declare -A CONFIG=(
     # Web
     ['web:mode']='apache2'
     ['web:webroots']='/vagrant/web/'
+    ['web:ssl']=true
 
     # PHP
     ['php:enabled']=true
     ['php:version']='5.6'
-    ['php:modules']='common mysql intl mcrypt sqlite3 gd mbstring xml tidy devel'
-    ['php:composer']=true
+    ['php:modules']='common mysql intl mcrypt sqlite3 redis gd mbstring xml tidy devel'
+    ['php:phpunit']=true
+    ['php:composer:enabled']=true
+    ['php:composer:github_token']=''
+    # See https://github.com/settings/tokens/new?scopes=repo to generate Github token
 
-    # Database
-    ['database:enabled']=true
-    ['database:mode']='percona'
-    ['database:fixtures']='/vagrant/vagrant/data/database/fixtures.sql'
+    # SQL
+    ['database:sql:enabled']=true
+    ['database:sql:mode']='percona'
+    ['database:sql:fixtures']='/vagrant/vagrant/data/database/sql/fixtures.sql'
+    
+    # Redis
+    ['database:redis:enabled']=true
 
     # PhpMyAdmin
     ['phpmyadmin:enabled']=true

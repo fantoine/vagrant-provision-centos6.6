@@ -1,6 +1,7 @@
 #!/bin/bash
 
 directory='/usr/share/phpmyadmin'
+version='4.4.5'
 
 function phpmyadmin_sed {
     mode="$1"
@@ -25,7 +26,7 @@ if [ ! -d $directory ]; then
 
     # Download latest phpMyAdmin
     mkdir -p /tmp/phpmyadmin
-    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/4.4.2/phpMyAdmin-4.4.2-all-languages.tar.gz/download >/dev/null 2>&1
+    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz "http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/${version}/phpMyAdmin-${version}-all-languages.tar.gz/download" >/dev/null 2>&1
     tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null 2>&1
 
     # Download theme
@@ -34,7 +35,7 @@ if [ ! -d $directory ]; then
 
     # Copy installation to specific folder
     mkdir -p /usr/share
-    mv /tmp/phpmyadmin/phpMyAdmin-4.4.2-all-languages $directory
+    mv "/tmp/phpmyadmin/phpMyAdmin-${version}-all-languages" $directory
     mv /tmp/phpmyadmin/metro $directory/themes/metro
 
     # Remove temporary directory

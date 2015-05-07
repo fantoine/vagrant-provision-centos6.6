@@ -9,12 +9,12 @@ if [ ! -f /etc/php.d/twig.ini ]; then
     git clone https://github.com/twigphp/Twig.git /tmp/twig >/dev/null 2>&1
 
     # Compile & Install
-    pushd /tmp/twig/ext/twig/
+    pushd /tmp/twig/ext/twig/ >/dev/null 2>&1
     phpize >/dev/null 2>&1
     ./configure >/dev/null 2>&1
     make >/dev/null 2>&1
     make install >/dev/null 2>&1
-    popd
+    popd >/dev/null 2>&1
 
     # Clean temporary files
     rm -r /tmp/twig

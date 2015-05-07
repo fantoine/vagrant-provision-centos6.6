@@ -8,6 +8,18 @@ easily and quickly setup a CentOS 6.6 VM with Vagrant.
 To get the provisioning scripts, you need to copy/checkout the library
 on a `vagrant` folder at the root of the folder which will be mounted on Vagrant.
 
+### Prepare server configuration
+
+Copy `<project>/vagrant/config.sh.dist` to `<project>/vagrant/config.sh` then edit it.
+
+Options:
+- **TODO**
+
+Make it runnable by running:
+```bash
+chmod +x <project>/vagrant/config.sh
+```
+
 ### Prepare Vagrantfile
 
 Copy `<project>/vagrant/Vagrantfile.dist` to `<project>/Vagrantfile` then edit it.
@@ -22,18 +34,7 @@ Options:
 - **server_extension** : The server domain extension (eg: mydomain.**local**)
 - **server_name** : The server domain nomain (eg: **mydomain**.local)
 - **server_aliases** : The server subdomains. Must be an array.
-
-### Prepare server configuration
-
-Copy `<project>/vagrant/config.sh.dist` to `<project>/vagrant/config.sh` then edit it.
-
-Options:
-- **TODO**
-
-Make it runnable by running:
-```bash
-chmod +x <project>/vagrant/config.sh
-```
+- **provision_config** : The path to `config.sh` file. By default, points to `/vagrant/vagrant/config.sh`.
 
 ### Create ssh keys
 

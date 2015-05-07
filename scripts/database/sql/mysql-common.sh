@@ -25,10 +25,12 @@ mysql -u root <<< 'DROP DATABASE IF EXISTS `test`';
 
 # Prepare root mysql user
 mysql -u root <<< "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-mysql -u root <<< "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('vagrant');"
 
 # Load fixtures
 if [ "$fixtures" != "" ] && [ -f $fixtures ]; then
     echo 'Loading fixtures'
     mysql -u root < $fixtures
 fi
+
+# Set root mysql user password
+mysql -u root <<< "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('vagrant');"
