@@ -20,6 +20,7 @@ if [ ! -f /etc/httpd/conf/httpd.conf ] ; then
 
     # Update default httpd configuration
     sed -i \
+        -e 's/#NameVirtualHost .*/NameVirtualHost *:80/' \
         -e 's/User .*/User vagrant/' \
         -e 's/Group .*/Group vagrant/' \
         -e 's/#EnableSendfile .*/EnableSendfile off/' \
