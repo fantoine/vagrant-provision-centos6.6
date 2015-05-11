@@ -41,7 +41,7 @@ function apache2_conf {
         -e "s@:domain:@$domain@g" \
         -e "s@:webroot:@$webroot@g" \
         $target
-    for sub in ${domains[@]}
+    for sub in "${domains[@]}"
     do
         sed -i -e "/ServerName.*/a    ServerAlias $sub.$domain" $target
     done
@@ -66,17 +66,24 @@ if [ ! -f $conf ] || [[ "$ssl" == "true" && (! -f $sslconf) ]]; then
     if [ "$ssl" == "true" ]; then
         echo 'Generating SSL certificates'
         mkdir -p "$sslpath"
+        openssl genrsa -out "${sslfile}.key" 2048 >/dev/null 2>&1
         openssl req \
-            -new -newkey rsa:2048 -days 365 -nodes -x509 \
-            -subj "/C=US/ST=Denial/L=Springfield/O=Vagrant/OU=Dev/CN=*.${domain}/emailAddress=contact@${domain}" \
-            -keyout "${sslfile}.key" \
-            -out "${sslfile}.crt" >/dev/null 2>&1
-        chmod 400 "${sslfile}.key" "${sslfile}.pem"
+            -new -nodes \
+            -subj "/C=US/ST=Vagrant/L=Vagrant/O=Vagrant/OU=Dev/CN=*.${domain}/emailAddress=vagrant@${domain}" \
+            -key "${sslfile}.key" -out "${sslfile}.csr" >/dev/null 2>&1
+        openssl x509 \
+            -req -days 3650 -in "${sslfile}.csr" \
+            -signkey "${sslfile}.key" -out "${sslfile}.crt" >/dev/null 2>&1
+        cat "${sslfile}.crt" "${sslfile}.key" > "${sslfile}.pem"
 
         echo 'Adding SSL Virtualhost'
         apache2_conf /vagrant/vagrant/data/web/httpd-ssl.conf $sslconf $webroot $domain
         if ! grep -q NameVirtualHost /etc/httpd/conf.d/ssl.conf; then
-            sed -i '/Listen 443/a NameVirtualHost *:443' /etc/httpd/conf.d/ssl.conf
+            sed -i \
+                -e '/Listen 443/a NameVirtualHost *:443' \
+                -e '/<VirtualHost _default_:443>/i <IfModule disable_virtualhost_hack.c>' \
+                -e '/<\/VirtualHost>/a <\/IfModule>' \
+                /etc/httpd/conf.d/ssl.conf
         fi
     fi
 
