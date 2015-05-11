@@ -51,7 +51,7 @@ if [ "$2" == "install" ]; then
 
     # Tools configuration
     if [ "${CONFIG['phpmyadmin:enabled']}" == true ]; then
-        $scripts/tools/phpmyadmin.sh
+        $scripts/tools/phpmyadmin.sh "${CONFIG['phpmyadmin:version']}"
     fi
     if [ "${CONFIG['nodejs:enabled']}" == true ]; then
         $scripts/tools/nodejs.sh "${CONFIG['nodejs:libraries']}"

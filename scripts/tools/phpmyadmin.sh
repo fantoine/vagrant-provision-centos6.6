@@ -1,7 +1,7 @@
 #!/bin/bash
 
+version="$1"
 directory='/usr/share/phpmyadmin'
-version='4.4.5'
 
 function phpmyadmin_sed {
     mode="$1"
