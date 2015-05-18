@@ -13,8 +13,8 @@ enabled=1
 CONTENT
     rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch >/dev/null 2>&1
     yum install -y elasticsearch java >/dev/null 2>&1
+    chkconfig elasticsearch on >/dev/null 2>&1
     
     # Start service
     service elasticsearch start >/dev/null 2>&1
-    chkconfig elasticsearch on >/dev/null 2>&1
 fi

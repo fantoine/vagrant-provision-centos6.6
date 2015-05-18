@@ -12,6 +12,7 @@ if [ "$2" == "server" ]; then
     $scripts/server/user.sh
     $scripts/server/repos.sh
     $scripts/server/update.sh
+    $scripts/server/start-stop-daemon.sh
     $scripts/server/ssh.sh "${CONFIG['server:ssh_key']}" "${CONFIG['server:known_hosts']}"
     $scripts/server/ntp.sh "${CONFIG['server:timezone']}"
     $scripts/server/fixes.sh
@@ -46,7 +47,10 @@ if [ "$2" == "install" ]; then
         $scripts/database/sql/${CONFIG['database:sql:mode']}.sh "${CONFIG['server:timezone']}" "${CONFIG['database:sql:fixtures']}" "$scripts/database/sql"
     fi
     if [ "${CONFIG['database:redis:enabled']}" == true ]; then
-        $scripts/database/redis.sh "${CONFIG['database:redis:version']}"
+        $scripts/database/redis.sh
+    fi
+    if [ "${CONFIG['database:mongodb:enabled']}" == true ]; then
+        $scripts/database/mongodb.sh
     fi
 
     # Tools configuration
