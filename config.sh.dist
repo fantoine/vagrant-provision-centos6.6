@@ -45,6 +45,7 @@ declare -A CONFIG=(
 
     # Symfony
     ['symfony:installer']=true
+    ['symfony:completion']=true
     ['symfony:twig']=true
     
     # Search engine
