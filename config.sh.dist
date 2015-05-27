@@ -14,7 +14,7 @@ declare -A CONFIG=(
     # PHP
     ['php:enabled']=true
     ['php:version']='5.6'
-    ['php:modules']='common mysql intl mcrypt sqlite3 redis gd mbstring xml tidy devel'
+    ['php:modules']='common mysql intl mcrypt sqlite3 redis gd mbstring xml tidy devel posix'
     ['php:phpunit']=true
     ['php:composer:enabled']=true
     ['php:composer:github_token']=''
