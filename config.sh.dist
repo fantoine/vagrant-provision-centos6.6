@@ -23,7 +23,7 @@ declare -A CONFIG=(
     # SQL
     ['database:sql:enabled']=true
     ['database:sql:mode']='percona'
-    ['database:sql:fixtures']='/vagrant/vagrant/data/database/sql/fixtures.sql'
+    ['database:sql:fixtures']='/vagrant/vagrant/data/database/fixtures.sql'
     
     # Redis
     ['database:redis:enabled']=true
@@ -33,7 +33,7 @@ declare -A CONFIG=(
 
     # PhpMyAdmin
     ['phpmyadmin:enabled']=true
-    ['phpmyadmin:version']='4.4.5'
+    ['phpmyadmin:version']='4.4.8'
 
     # NodeJS
     ['nodejs:enabled']=true
