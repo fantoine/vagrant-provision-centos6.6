@@ -30,6 +30,7 @@ declare -A CONFIG=(
 
     # MongoDB
     ['database:mongodb:enabled']=true
+    ['database:mongodb:fixtures']='/vagrant/vagrant/data/database/fixtures.js'
 
     # PhpMyAdmin
     ['phpmyadmin:enabled']=true

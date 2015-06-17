@@ -50,7 +50,7 @@ if [ "$2" == "install" ]; then
         $scripts/database/redis.sh
     fi
     if [ "${CONFIG['database:mongodb:enabled']}" == true ]; then
-        $scripts/database/mongodb.sh "${CONFIG['php:enabled']}"
+        $scripts/database/mongodb.sh "${CONFIG['database:mongodb:fixtures']}" "${CONFIG['php:enabled']}"
     fi
 
     # Tools configuration

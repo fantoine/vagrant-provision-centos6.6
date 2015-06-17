@@ -1,6 +1,7 @@
 #!/bin/bash
 
-phpenabled="$1"
+fixtures="$1"
+phpenabled="$2"
 driverversion="1.6.8"
 
 if ! yum list installed mongodb-org >/dev/null 2>&1; then
@@ -48,4 +49,10 @@ if [ "$phpenabled" == true ] && [ ! "$(php -m | grep mongo)" ]; then
 
     # Restart Apache
     service httpd restart >/dev/null 2>&1
+fi
+
+# Load fixtures
+if [ "$fixtures" != "" ] && [ -f $fixtures ]; then
+    echo 'Loading fixtures'
+    mongo "$fixtures" >/dev/null 2>&1
 fi
