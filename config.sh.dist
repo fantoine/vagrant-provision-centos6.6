@@ -19,6 +19,9 @@ declare -A CONFIG=(
     ['php:composer:enabled']=true
     ['php:composer:github_token']=''
     # See https://github.com/settings/tokens/new?scopes=repo to generate Github token
+    ['php:blackfire:enabled']=true
+    ['php:blackfire:server_id']=''
+    ['php:blackfire:server_token']=''
 
     # SQL
     ['database:sql:enabled']=true

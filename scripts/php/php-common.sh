@@ -15,7 +15,7 @@ if [ ! -f /etc/php.ini ]; then
     sed -i \
         -e "s/;date\.timezone =.*/date.timezone = $timezone/" \
         -e 's/memory_limit =.*/memory_limit = 1G/' \
-        -e 's/error_reporting =.*/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_STRICT/' \
+        -e 's/error_reporting =.*/error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_USER_DEPRECATED \& ~E_STRICT/' \
         /etc/php.ini
 
     # Chown session folder

@@ -40,6 +40,9 @@ if [ "$2" == "install" ]; then
         if [ "${CONFIG['php:phpunit']}" ]; then
             $scripts/php/phpunit.sh
         fi
+        if [ "${CONFIG['php:blackfire:enabled']}" ]; then
+            $scripts/php/blackfire.sh "${CONFIG['php:blackfire:server_id']}" "${CONFIG['php:blackfire:server_token']}"
+        fi
     fi
 
     # Database configuration
