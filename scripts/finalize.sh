@@ -7,7 +7,3 @@ if ! grep -q $cdVagrant /home/vagrant/.bashrc ; then
     echo '# Go to vagrant' >> /home/vagrant/.bashrc
     echo $cdVagrant >> /home/vagrant/.bashrc
 fi
-
-# Fix owners
-echo 'Fixing files ownership'
-chown -R vagrant:vagrant /vagrant
