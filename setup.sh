@@ -34,13 +34,13 @@ if [ "$2" == "install" ]; then
         if [ -f "$scripts/php/php-${CONFIG['php:version']}.sh" ]; then
             $scripts/php/php-${CONFIG['php:version']}.sh "${CONFIG['server:timezone']}" "${CONFIG['php:modules']}" "$scripts/php"
         fi
-        if [ "${CONFIG['php:composer:enabled']}" ]; then
+        if [ "${CONFIG['php:composer:enabled']}" == true ]; then
             $scripts/php/composer.sh "${CONFIG['php:composer:github_token']}"
         fi
-        if [ "${CONFIG['php:phpunit']}" ]; then
+        if [ "${CONFIG['php:phpunit']}" == true ]; then
             $scripts/php/phpunit.sh
         fi
-        if [ "${CONFIG['php:blackfire:enabled']}" ]; then
+        if [ "${CONFIG['php:blackfire:enabled']}" == true ]; then
             $scripts/php/blackfire.sh "${CONFIG['php:blackfire:server_id']}" "${CONFIG['php:blackfire:server_token']}"
         fi
     fi
