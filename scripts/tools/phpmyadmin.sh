@@ -30,7 +30,7 @@ if [ ! -d $directory ]; then
     tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null 2>&1
 
     # Download theme
-    wget -O /tmp/phpmyadmin/metro-theme.tar.gz http://sourceforge.net/projects/phpmyadmin/files/themes/metro/2.2/metro-2.2.zip/download >/dev/null 2>&1
+    wget -O /tmp/phpmyadmin/metro-theme.tar.gz https://files.phpmyadmin.net/themes/metro/2.2/metro-2.2.zip >/dev/null 2>&1
     unzip /tmp/phpmyadmin/metro-theme.tar.gz -d /tmp/phpmyadmin >/dev/null 2>&1
 
     # Copy installation to specific folder
