@@ -26,7 +26,7 @@ if [ ! -d $directory ]; then
 
     # Download latest phpMyAdmin
     mkdir -p /tmp/phpmyadmin
-    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz "http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/${version}/phpMyAdmin-${version}-all-languages.tar.gz/download" >/dev/null 2>&1
+    wget -O /tmp/phpmyadmin/phpmyadmin.tar.gz "https://files.phpmyadmin.net/phpMyAdmin/${version}/phpMyAdmin-${version}-all-languages.tar.gz" >/dev/null 2>&1
     tar xvf /tmp/phpmyadmin/phpmyadmin.tar.gz -C /tmp/phpmyadmin >/dev/null 2>&1
 
     # Download theme

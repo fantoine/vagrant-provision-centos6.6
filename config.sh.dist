@@ -37,7 +37,7 @@ declare -A CONFIG=(
 
     # PhpMyAdmin
     ['phpmyadmin:enabled']=true
-    ['phpmyadmin:version']='4.4.8'
+    ['phpmyadmin:version']='4.4.11'
 
     # NodeJS
     ['nodejs:enabled']=true
