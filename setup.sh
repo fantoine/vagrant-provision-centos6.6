@@ -66,6 +66,9 @@ if [ "$2" == "install" ]; then
     if [ "${CONFIG['ruby:enabled']} == true" ]; then
         $scripts/tools/ruby.sh "${CONFIG['ruby:gems']}"
     fi
+    if [ "${CONFIG['python:enabled']} == true" ]; then
+        $scripts/tools/python.sh "${CONFIG['python:version']}"
+    fi
 
     # Symfony configuration
     if [ "${CONFIG['symfony:installer']}" == true ]; then

@@ -47,6 +47,10 @@ declare -A CONFIG=(
     ['ruby:enabled']=true
     ['ruby:gems']='capifony'
 
+    # Python
+    ['python:enabled']=true
+    ['python:version']='3'
+
     # Symfony
     ['symfony:installer']=true
     ['symfony:completion']=true
