@@ -1,6 +1,7 @@
 #!/bin/bash
 
 version="$1"
+read -a libraries <<< "$2"
 
 if [ "$version" == "3" ] && [ ! -f /usr/local/bin/python3.4 ]; then
     echo 'Installing Python3'
@@ -26,6 +27,9 @@ if [ "$version" == "3" ] && [ ! -f /usr/local/bin/python3.4 ]; then
     ln -s /usr/local/bin/python3.4 /usr/local/bin/python3 >/dev/null 2>&1
     ln -s /usr/local/bin/pip3.4 /usr/local/bin/pip3 >/dev/null 2>&1
 
-    # Upgrade pip
+    # Upgrade pip and install libraries
     /usr/local/bin/pip3.4 install --upgrade pip >/dev/null 2>&1
+    if [ "${#libraries[@]}" -gt 0 ]; then
+        /usr/local/bin/pip3.4 install ${libraries[@]} >/dev/null 2>&1
+    fi
 fi

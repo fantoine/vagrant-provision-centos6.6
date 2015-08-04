@@ -50,6 +50,7 @@ declare -A CONFIG=(
     # Python
     ['python:enabled']=true
     ['python:version']='3'
+    ['python:pip']=''
 
     # Symfony
     ['symfony:installer']=true

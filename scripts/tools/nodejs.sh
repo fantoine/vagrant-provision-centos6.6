@@ -12,5 +12,7 @@ if ! yum list installed nodejs >/dev/null 2>&1; then
     yum install -y nodejs >/dev/null 2>&1
 
     # Install libraries
-    npm install -g ${libraries[@]} >/dev/null 2>&1
+    if [ "${#libraries[@]}" -gt 0 ]; then
+        npm install -g ${libraries[@]} >/dev/null 2>&1
+    fi
 fi

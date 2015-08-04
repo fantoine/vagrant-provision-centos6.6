@@ -9,7 +9,7 @@ if [ ! -f /usr/local/rvm/bin/rvm ]; then
     gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 >/dev/null 2>&1
 
     # Compacting gems
-    if [ ${#gems[@]} -ne 0 ]; then
+    if [ ${#gems[@]} -gt 0 ]; then
         gemsCmd=$(printf ',%s' "${gems[@]}")
         gemsCmd="--gems=${gemsCmd:1}"
     fi
