@@ -41,7 +41,7 @@ if [ "$phpenabled" == true ] && [ ! "$(php -m | grep mongo)" ]; then
     popd >/dev/null 2>&1
 
     # Clean temporary files
-    rm -r /tmp/mongo-php
+    rm -rf /tmp/mongo-php
 
     # Enable module
     echo '; Enable mongo extension module' > /etc/php.d/mongo.ini

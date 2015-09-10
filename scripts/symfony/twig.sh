@@ -17,7 +17,7 @@ if [ ! -f /etc/php.d/twig.ini ]; then
     popd >/dev/null 2>&1
 
     # Clean temporary files
-    rm -r /tmp/twig
+    rm -rf /tmp/twig
 
     # Enable module
     echo '; Enable twig extension module' > /etc/php.d/twig.ini
