@@ -4,13 +4,13 @@ domain="$1"
 read -a domains <<< "$2"
 read -a webroots <<< "$3"
 ssl="$4"
+conftpl="$5"
+confssltpl="$6"
 
 conf='/etc/httpd/conf.d/vagrant.conf'
 sslconf='/etc/httpd/conf.d/vagrant.ssl.conf'
-sslpath="/etc/ssl/${domain}"
-sslfile="${sslpath}/${domain}"
 
-if [ ! -f /etc/httpd/conf/httpd.conf ] ; then
+if ! yum list installed httpd >/dev/null 2>&1; then
     echo 'Installing Apache'
     yum install -y httpd mod_ssl >/dev/null 2>&1
     chkconfig httpd on >/dev/null 2>&1
@@ -20,7 +20,6 @@ if [ ! -f /etc/httpd/conf/httpd.conf ] ; then
 
     # Update default httpd configuration
     sed -i \
-        -e 's/#NameVirtualHost .*/NameVirtualHost *:80/' \
         -e 's/User .*/User vagrant/' \
         -e 's/Group .*/Group vagrant/' \
         -e 's/#EnableSendfile .*/EnableSendfile off/' \
@@ -60,27 +59,16 @@ if [ ! -f $conf ] || [[ "$ssl" == "true" && (! -f $sslconf) ]]; then
 
     # Add default configuration
     echo 'Adding default Virtualhost'
-    apache2_conf /vagrant/vagrant/data/web/httpd.conf $conf $webroot $domain
+    apache2_conf $conftpl $conf $webroot $domain
+    sed -i -e '/Listen 80/i #Listen 80' /etc/httpd/conf/httpd.conf
 
     # Add ssl configuration
     if [ "$ssl" == "true" ]; then
-        echo 'Generating SSL certificates'
-        mkdir -p "$sslpath"
-        openssl genrsa -out "${sslfile}.key" 2048 >/dev/null 2>&1
-        openssl req \
-            -new -nodes \
-            -subj "/C=US/ST=Vagrant/L=Vagrant/O=Vagrant/OU=Dev/CN=*.${domain}/emailAddress=vagrant@${domain}" \
-            -key "${sslfile}.key" -out "${sslfile}.csr" >/dev/null 2>&1
-        openssl x509 \
-            -req -days 3650 -in "${sslfile}.csr" \
-            -signkey "${sslfile}.key" -out "${sslfile}.crt" >/dev/null 2>&1
-        cat "${sslfile}.crt" "${sslfile}.key" > "${sslfile}.pem"
-
         echo 'Adding SSL Virtualhost'
-        apache2_conf /vagrant/vagrant/data/web/httpd-ssl.conf $sslconf $webroot $domain
-        if ! grep -q NameVirtualHost /etc/httpd/conf.d/ssl.conf; then
+        apache2_conf $confssltpl $sslconf $webroot $domain
+        if ! grep -q "disable_virtualhost_hack" /etc/httpd/conf.d/ssl.conf; then
             sed -i \
-                -e '/Listen 443/a NameVirtualHost *:443' \
+                -e '/Listen 443/i #Listen 443' \
                 -e '/<VirtualHost _default_:443>/i <IfModule disable_virtualhost_hack.c>' \
                 -e '/<\/VirtualHost>/a <\/IfModule>' \
                 /etc/httpd/conf.d/ssl.conf

@@ -25,12 +25,18 @@ if [ "$2" == "install" ]; then
     domains="$4"
 
     # Web server configuration
-    if [ -f "$scripts/web/${CONFIG['web:mode']}.sh" ]; then
-        $scripts/web/${CONFIG['web:mode']}.sh "$domain" "$domains" "${CONFIG['web:webroots']}" "${CONFIG['web:ssl']}"
+    if [ "${CONFIG['web:ssl']}" == true ]; then
+        $scripts/web/ssl.sh "$domain"
+    fi
+    if [ "${CONFIG['web:httpd:enabled']}" == true ]; then
+        $scripts/web/httpd.sh "$domain" "$domains" "${CONFIG['web:webroots']}" "${CONFIG['web:ssl']}" "${CONFIG['web:httpd:conf']}" "${CONFIG['web:httpd:confssl']}"
+    fi
+    if [ "${CONFIG['web:nginx:enabled']}" == true ]; then
+        $scripts/web/nginx.sh "$domain" "$domains" "${CONFIG['web:ssl']}" "${CONFIG['web:nginx:conf']}" "${CONFIG['web:nginx:confssl']}"
     fi
 
     # PHP configuration
-    if [ ${CONFIG['php:enabled']} == true ]; then
+    if [ "${CONFIG['php:enabled']}" == true ]; then
         if [ -f "$scripts/php/php-${CONFIG['php:version']}.sh" ]; then
             $scripts/php/php-${CONFIG['php:version']}.sh "${CONFIG['server:timezone']}" "${CONFIG['php:modules']}" "$scripts/php"
         fi

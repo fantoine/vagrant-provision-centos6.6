@@ -7,9 +7,14 @@ declare -A CONFIG=(
     ['server:known_hosts']='github.com bitbucket.com'
 
     # Web
-    ['web:mode']='apache2'
     ['web:webroots']='/vagrant/web/'
     ['web:ssl']=true
+    ['web:httpd:enabled']=true
+    ['web:httpd:conf']='/vagrant/vagrant/data/web/httpd.conf'
+    ['web:httpd:confssl']='/vagrant/vagrant/data/web/httpd-ssl.conf'
+    ['web:nginx:enabled']=false
+    ['web:nginx:conf']='/vagrant/vagrant/data/web/nginx.conf'
+    ['web:nginx:confssl']='/vagrant/vagrant/data/web/nginx-ssl.conf'
 
     # PHP
     ['php:enabled']=true
