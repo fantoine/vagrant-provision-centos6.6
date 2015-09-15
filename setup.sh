@@ -75,6 +75,9 @@ if [ "$2" == "install" ]; then
     if [ "${CONFIG['python:enabled']} == true" ]; then
         $scripts/tools/python.sh "${CONFIG['python:version']}" "${CONFIG['python:pip']}"
     fi
+    if [ "${CONFIG['zeromq:enabled']} == true" ]; then
+        $scripts/tools/zeromq.sh "${CONFIG['php:enabled']}"
+    fi
 
     # Symfony configuration
     if [ "${CONFIG['symfony:installer']}" == true ]; then

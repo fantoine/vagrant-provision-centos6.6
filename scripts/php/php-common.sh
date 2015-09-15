@@ -20,7 +20,10 @@ if [ ! -f /etc/php.ini ]; then
 
     # Chown session folder
     chown -R vagrant:vagrant /var/lib/php/session
-    
+
+    # Update PECL channels
+    pecl channel-update pecl.php.net >/dev/null 2>&1
+
     # Restarting Apache
     service httpd restart >/dev/null 2>&1
 fi
