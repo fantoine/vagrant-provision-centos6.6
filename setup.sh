@@ -69,13 +69,13 @@ if [ "$2" == "install" ]; then
     if [ "${CONFIG['nodejs:enabled']}" == true ]; then
         $scripts/tools/nodejs.sh "${CONFIG['nodejs:libraries']}"
     fi
-    if [ "${CONFIG['ruby:enabled']} == true" ]; then
+    if [ "${CONFIG['ruby:enabled']}" == true ]; then
         $scripts/tools/ruby.sh "${CONFIG['ruby:gems']}"
     fi
-    if [ "${CONFIG['python:enabled']} == true" ]; then
+    if [ "${CONFIG['python:enabled']}" == true ]; then
         $scripts/tools/python.sh "${CONFIG['python:version']}" "${CONFIG['python:pip']}"
     fi
-    if [ "${CONFIG['zeromq:enabled']} == true" ]; then
+    if [ "${CONFIG['zeromq:enabled']}" == true ]; then
         $scripts/tools/zeromq.sh "${CONFIG['php:enabled']}"
     fi
 

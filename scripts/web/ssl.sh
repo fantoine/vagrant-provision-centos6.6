@@ -6,7 +6,7 @@ sslpath="/etc/ssl/${domain}"
 sslfile="${sslpath}/${domain}"
 
 if [ ! -f "${sslfile}.key" ]; then
-    echo 'Generating SSL certificates'
+    echo 'Generating SSL certificate'
     mkdir -p "$sslpath"
     openssl genrsa -out "${sslfile}.key" 2048 >/dev/null 2>&1
     openssl req \
