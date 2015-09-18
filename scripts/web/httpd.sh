@@ -60,7 +60,7 @@ if [ ! -f $conf ] || [[ "$ssl" == "true" && (! -f $sslconf) ]]; then
     # Add default configuration
     echo 'Adding default Virtualhost'
     apache2_conf $conftpl $conf $webroot $domain
-    sed -i -e '/Listen 80/i #Listen 80' /etc/httpd/conf/httpd.conf
+    sed -i -e 's/Listen 80/#Listen 80' /etc/httpd/conf/httpd.conf
 
     # Add ssl configuration
     if [ "$ssl" == "true" ]; then
@@ -68,7 +68,7 @@ if [ ! -f $conf ] || [[ "$ssl" == "true" && (! -f $sslconf) ]]; then
         apache2_conf $confssltpl $sslconf $webroot $domain
         if ! grep -q "disable_virtualhost_hack" /etc/httpd/conf.d/ssl.conf; then
             sed -i \
-                -e '/Listen 443/i #Listen 443' \
+                -e 's/Listen 443/#Listen 443' \
                 -e '/<VirtualHost _default_:443>/i <IfModule disable_virtualhost_hack.c>' \
                 -e '/<\/VirtualHost>/a <\/IfModule>' \
                 /etc/httpd/conf.d/ssl.conf
