@@ -27,6 +27,8 @@ declare -A CONFIG=(
     ['php:blackfire:enabled']=true
     ['php:blackfire:server_id']=''
     ['php:blackfire:server_token']=''
+    ['php:hhvm:enabled']=true
+    ['php:hhvm:composer']=true
 
     # SQL
     ['database:sql:enabled']=true

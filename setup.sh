@@ -49,6 +49,9 @@ if [ "$2" == "install" ]; then
         if [ "${CONFIG['php:blackfire:enabled']}" == true ]; then
             $scripts/php/blackfire.sh "${CONFIG['php:blackfire:server_id']}" "${CONFIG['php:blackfire:server_token']}"
         fi
+        if [ "${CONFIG['php:hhvm:enabled']}" == true ]; then
+            $scripts/php/hhvm.sh "${CONFIG['php:hhvm:composer']}"
+        fi
     fi
 
     # Database configuration
